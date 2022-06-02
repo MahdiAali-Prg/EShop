@@ -1,0 +1,74 @@
+﻿@{
+}
+@using EShop.Common.DTOs
+@model ViewModelWithPageInfo<IEnumerable<Brand>>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+
+                <div class="card-title-wrap bar-primary">
+                    <h4 class="card-title">
+                        لیست برند ها
+                    </h4>
+                </div>
+
+                <a class="heading-elements-toggle">
+                    <i class="la la-ellipsis-v font-medium-3"></i>
+                </a>
+
+                <a class="btn btn-success" action="Create" controller="Brand" area="Admin">افزودن برند جدید</a>
+
+            </div>
+            <div class="card-content mt-1">
+                <div class="table-responsive">
+                    <table class="table table-hover table-xl mb-0" id="recent-orders">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">کد برند</th>
+                                <th class="border-top-0">نام</th>
+                                <th class="border-top-0">تصویر</th>
+                                <th class="border-top-0">دستورات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ViewModel.Any())
+                            {
+                                @foreach (Brand item in Model.ViewModel)
+                                {
+                                    <tr>
+                                        <td class="text-truncate">
+                                            @item.BrandId
+                                        </td>
+                                        <td class="text-truncate">
+                                            <a class="text-uppercase text-dark" area="Admin" controller="Brand" action="Detail" link-value-id="@item.BrandId">@item.Name</a>
+                                        </td>
+                                        <td class="text-truncate">
+                                            <img class="img-thumbnail" src="/Images/BrandImage/@item.Image" alt="@item.Name" width="100" />
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-outline-danger round mb-0" href="">حذف</a>
+                                            <a class="btn btn-sm btn-outline-info round mb-0" area="Admin" controller="Brand" action="Edit" link-value-id="@item.BrandId">ویرایش</a>
+                                            <a class="btn btn-sm btn-outline-primary round mb-0" area="Admin" controller="Brand" action="Detail" link-value-id="@item.BrandId">نمایش اطلاعات</a>
+                                            <a class="btn btn-sm btn-outline-warning round mb-0" asp-controller="Brand" asp-action="Detail" asp-route-id="@item.BrandId">ویو کاربران</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th colspan="4" class="text-truncate text-danger">در حال حاضر برندی ثبت نشده است</th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="mt-1">
+
+                        <div class="dataTables_paginate paging_simple_numbers" page-info="@Model.PaginationInfo" action="Index" controller="Brand"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

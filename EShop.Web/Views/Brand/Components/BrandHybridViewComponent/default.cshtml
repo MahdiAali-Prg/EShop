@@ -1,0 +1,31 @@
+﻿@{
+}
+@model IEnumerable<Brand>
+<div class="col-lg-3 col-md-4 col-sm-12 pl mt-3">
+    <div class="shortcode-widget-area-sidebar">
+        <section class="widget-posts">
+            <div class="header-sidebar mb-3">
+                <h3>جدیدترین برند ها</h3>
+            </div>
+            <div class="content-sidebar">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="item-inner">
+                            <div class="item-thumb">
+                                <a asp-action="Detail" asp-controller="Brand" asp-route-id="@item.BrandId" class="img-holder d-block">
+                                    <img src="/Images/BrandImage/@item.Image" alt="@item.Name">
+                                </a>
+                            </div>
+                            <div class="title">
+                                <a asp-action="Detail" asp-controller="Brand" asp-route-id="@item.BrandId">
+                                    <h2 class="title-tag">@item.Name</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>

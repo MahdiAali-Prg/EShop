@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = $"برند {Model.Name}";
+}
+@model Brand
+
+<main class="main-row mb-2 mt-2 d-block" style="transform: none;">
+    <div class="container-main" style="transform: none;">
+        <div class="d-block" style="transform: none;">
+            <div class="col-lg-9 col-md-8 col-sm-12 pr mt-3">
+                <section class="blog-home">
+                    <article class="post-item">
+                        <header class="entry-header mb-3">
+                            <div class="post-meta author">
+                                <i class="mdi mdi-account-circle-outline"></i>
+                                اطلاعات بیشتر در مورد برند @Model.Name
+                            </div>
+                        </header>
+                        <div class="text-center">
+                            <img src="/Images/BrandImage/@Model.Image" alt="یرند @Model.Name" class="img-thumbnail" />
+                        </div>
+                        <div class="title">
+                            <a href="#">
+                                <h1 class="title-tag">@Model.Name</h1>
+                            </a>
+                        </div>
+                        <div class="content-blog">
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </article>
+                </section>
+            </div>
+            <vc:brand-hybrid-view-component/>
+        </div>
+    </div>
+</main>

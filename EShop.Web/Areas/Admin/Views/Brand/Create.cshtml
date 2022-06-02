@@ -1,0 +1,77 @@
+﻿@model Brand
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-wrap bar-success">
+                    <h4 class="card-title mb-0">ثبت اطلاعات برند</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="px-3">
+                    <form class="form" form-action="Create" form-controller="Brand" form-area="Admin" method="post" enctype="multipart/form-data">
+                        <div class="form-body">
+                            <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label asp-for="Name"></label>
+                                    <input asp-for="Name" class="form-control round" placeholder="نام برند">
+                                </fieldset>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label asp-for="Description"></label>
+                                    <textarea class="form-control" asp-for="Description" placeholder="توضیحات کوتاه درباره برند" rows="6"></textarea>
+                                </fieldset>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
+                                <div class="card">
+                                    <div class="card card-header">
+                                        تصویر بارگذاری شده
+                                    </div>
+                                    <div class="card card-body">
+                                        <img class="img-thumbnail col-6" height="200" src="/Images/BrandImage/samsung.png" id="perview_image" />
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">بازگذاری تصویر</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="imgInp" name="brandImage">
+                                        <label class="custom-file-label" for="inputGroupFile01">انتخاب فایل</label>
+                                    </div>
+                                </div>
+                                @Html.AntiForgeryToken()
+                                <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <div class="text-danger" asp-validation-summary="All">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">ثبت برند</button>
+                                    </fieldset>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-lg-3 col-md-12 col-sm-12 p-1">
+                        <a class="btn btn-danger" controller="Brand" action="Index">
+                            <i class="icon-arrow-left"></i> بازگشت
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script
+{
+    <script asp-src-include="/lib/**.js"></script>
+    <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("Description");
+    </script>
+}

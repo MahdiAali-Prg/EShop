@@ -1,0 +1,32 @@
+﻿@{
+}
+
+@model Brand
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-wrap bar-success">
+                    <h4 class="card-title mb-0">@Model.Name (@Model.BrandId)</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="px-3">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <img src="/Images/BrandImage/@Model.Image" title="تصویر برند @Model.Name" alt="@Model.Name" height="300" class="img-thumbnail"/>
+                        </div>
+                        
+                        <div class="col-12 mt-2">
+                            <h5>توضیحات برند : </h5>
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-danger mr-3 mt-3" controller="Brand" action="Index">بازگشت <i class="icon-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
