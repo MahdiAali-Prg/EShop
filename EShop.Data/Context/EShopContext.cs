@@ -10,10 +10,19 @@ namespace EShop.Data.Context
     {
         public EShopContext(DbContextOptions<EShopContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<BlogCategory> BlogCategories { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BlogCategory>()
+                .HasOne(o => o.Category)
+                .WithMany(o => o.BlogCategories)
+                .HasForeignKey(f => f.ParentId);
+        }
     }
 }
