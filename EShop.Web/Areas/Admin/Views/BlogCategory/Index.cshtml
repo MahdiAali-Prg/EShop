@@ -1,3 +1,86 @@
 ﻿@{
+    ViewBag.Title = "لیست دسته بندی بلاگ";
 }
-<h1>Blog Category List</h1>
+@model IEnumerable<BlogCategory>
+
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title-wrap bar-primary">
+                <h4 class="card-title">
+                    دسته بندی بلاگ
+                </h4>
+            </div>
+            <a class="heading-elements-toggle">
+                <i class="la la-ellipsis-v font-medium-3"></i>
+            </a>
+            <a class="btn btn-success" asp-area="Admin" asp-action="Create" asp-controller="BlogCategory">
+                افزودن دسته بندی جدید
+            </a>
+        </div>
+        <div class="card-content mt-1">
+            <div class="table-responsive">
+                <table class="table table-hover table-xl mb-0" id="recent-orders">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">کد</th>
+                            <th class="border-top-0">نام</th>
+                            <th class="border-top-0">زیر مجموعه ها</th>
+                            <th class="border-top-0">دستورات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            foreach (BlogCategory item in Model.Where(w=>w.ParentId == null))
+                            {
+                                <tr>
+                                    <td class="text-truncate">@item.BlogCategoryId</td>
+                                    <td class="text-truncate">@item.Name</td>
+                                    <td>
+                                        @if (Model.Any(m => m.ParentId == item.BlogCategoryId))
+                                        {
+                                            <ul class="list-group">
+                                                @foreach (var secondItem in Model.Where(m => m.ParentId == item.BlogCategoryId))
+                                                {
+                                                    <li class="list-group-item">@secondItem.Name 
+                                                        <a class="btn btn-sm btn-primary" asp-area="Admin" asp-action="Edit" asp-controller="BlogCategory" asp-route-id="@secondItem.BlogCategoryId">
+                                                            <i class="icon-pencil"></i>
+                                                        </a>
+                                                        <a class="btn btn-sm btn-danger" href="">
+                                                            <i class="icon-trash"></i>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-success" asp-area="Admin" asp-action="Create" asp-controller="BlogCategory" asp-route-id="@item.BlogCategoryId">
+                                            <i class="icon-plus"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-primary" asp-area="Admin" asp-action="Edit" asp-controller="BlogCategory" asp-route-id="@item.BlogCategoryId">
+                                            <i class="icon-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-danger" href="">
+                                            <i class="icon-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-danger">
+                                    در حال حاضر چیزی ثبت نشده است
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

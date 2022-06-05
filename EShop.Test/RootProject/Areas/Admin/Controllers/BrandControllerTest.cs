@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using EShop.Common.DTOs;
 using EShop.Data.Models;
@@ -86,7 +85,7 @@ namespace EShop.Test.RootProject.Areas.Admin.Controllers
                     ImageFile.Image());
 
             // Assert
-            Assert.Equal("/Admin/Brand", (result as RedirectResult)?.Url);
+            Assert.Equal("Index", (result as RedirectToActionResult)?.ActionName);
         }
 
 
@@ -193,10 +192,10 @@ namespace EShop.Test.RootProject.Areas.Admin.Controllers
                 await brandController.Edit(
                         new Brand() { BrandId = 1, Name = "B1", Description = "Bd1", Image = "test.png" }, null,
                         default)
-                    as RedirectResult;
+                    as RedirectToActionResult;
 
             // Assert
-            Assert.Equal("/Admin/Brand", result?.Url);
+            Assert.Equal("Index", result?.ActionName);
         }
 
     }

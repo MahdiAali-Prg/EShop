@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = $"ویرایش دسته بندی {@Model.Name}";
+}
+@model BlogCategory
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title mb-0">ویرایش دسته بندی @Model.Name</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <form class="form" id="Edit-Blog-Category-Form" asp-area="Admin" asp-action="Edit" asp-controller="BlogCategory" method="post">
+                    <div class="form-body">
+                        <div class="col-12 mb-1">
+                            <input type="hidden" asp-for="ParentId"/>
+                            <input type="hidden" asp-for="BlogCategoryId"/>
+                            <fieldset class="form-group">
+                                <label for="roundText">عنوان دسته بندی</label>
+                                <input asp-for="Name" class="form-control round" placeholder="عنوان دسته بندی را وارد کنید">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </fieldset>
+                            @Html.AntiForgeryToken()
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+                                <a class="btn btn-block btn-success" onclick="SubmitEditCategory()">ویرایش</a>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+                                <button type="reset" class="btn btn-block btn-primary">
+                                    پاک کردن فرم
+                                </button>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                <a class="btn btn-block btn-danger" asp-action="Index" asp-area="Admin" asp-controller="BlogCategory">بازگشت</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section css
+{
+    <link rel="stylesheet" href="/Admin-Assets/vendors/css/sweetalert2.min.css">
+}
+@section script
+{
+    <script asp-src-include="/Admin-Assets/vendors/js/sweetalert2.min.*,/lib/**.min.js,/lib/AdminSweetAlert.*" asp-src-exclude="/lib/ImagePreview.*"></script>
+}

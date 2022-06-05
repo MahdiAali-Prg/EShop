@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "افزودن دسته بندی جدید";
+}
+
+@model BlogCategory
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title mb-0">افزودن دسته بندی جدید</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <form class="form" asp-action="Create" asp-area="Admin" asp-controller="BlogCategory" method="post">
+                    <div class="form-body">
+                        <div class="col-12 mb-1">
+                            <input type="hidden" asp-for="ParentId"/>
+                            <fieldset class="form-group">
+                                <label for="roundText">عنوان دسته بندی</label>
+                                <input asp-for="Name" class="form-control round" placeholder="عنوان دسته بندی را وارد کنید">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </fieldset>
+                            @Html.AntiForgeryToken()
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+                                <button type="submit" class="btn btn-block btn-success">ثبت دسته بندی جدید</button>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+                                <button type="reset" class="btn btn-block btn-primary">
+                                    پاک کردن فرم
+                                </button>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                <a class="btn btn-block btn-danger" asp-area="Admin" asp-action="Index" asp-controller="BlogCategory">بازگشت</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script
+{
+    <script asp-src-include="/lib/**.min.js" asp-src-exclude="/lib/ImagePreview.*,/lib/AdminSweetAlert.*"></script>
+}
