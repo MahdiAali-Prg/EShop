@@ -58,8 +58,8 @@ namespace EShop.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapAreaControllerRoute("Admin", "Admin", "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

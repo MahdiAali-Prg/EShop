@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -10,11 +9,17 @@ namespace EShop.Common.Services
     {
         #region Construntors
 
-        public UrlGenerator(string area, string controller, string action)
+        public UrlGenerator(string area, string controller, string action) : this(area, controller, action, null)
         {
-            _area = area;
-            _controller = controller;
-            _action = action;
+        }
+        public UrlGenerator(string controller, string action, object value) : this(null, controller, action, null)
+        {
+        }
+        public UrlGenerator(string controller, string action) : this(null, controller, action, null)
+        {
+        }
+        public UrlGenerator(string controller) : this(null, controller, "Index", null)
+        {
         }
 
         public UrlGenerator(string area, string controller, string action, object value)
@@ -23,25 +28,6 @@ namespace EShop.Common.Services
             _controller = controller;
             _action = action;
             _value = value;
-        }
-
-        public UrlGenerator(string controller, string action, object value)
-        {
-            _controller = controller;
-            _action = action;
-            _value = value;
-        }
-
-        public UrlGenerator(string controller, string action)
-        {
-            _controller = controller;
-            _action = action;
-        }
-
-        public UrlGenerator(string controller)
-        {
-            _controller = controller;
-            _action = "Index";
         }
 
         #endregion

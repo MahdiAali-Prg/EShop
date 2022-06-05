@@ -1,4 +1,8 @@
-﻿@model Brand
+﻿@{
+    ViewBag.Title = "افزودن برند جدید";
+}
+
+@model Brand
 
 <div class="row">
     <div class="col-md-12">
@@ -10,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="px-3">
-                    <form class="form" form-action="Create" form-controller="Brand" form-area="Admin" method="post" enctype="multipart/form-data">
+                    <form class="form" asp-area="Admin" asp-controller="Brand" asp-action="Create" method="post" enctype="multipart/form-data">
                         <div class="form-body">
                             <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
@@ -57,7 +61,7 @@
                         </div>
                     </form>
                     <div class="col-lg-3 col-md-12 col-sm-12 p-1">
-                        <a class="btn btn-danger" controller="Brand" action="Index">
+                        <a class="btn btn-danger" asp-area="Admin" asp-controller="Brand" asp-action="Index">
                             <i class="icon-arrow-left"></i> بازگشت
                         </a>
                     </div>

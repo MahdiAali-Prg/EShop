@@ -9,7 +9,6 @@ using EShop.Data.Repositories.GenericRepository;
 using EShop.Web.Tools;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EShop.Web.Areas.Admin.Controllers
 {
@@ -29,7 +28,7 @@ namespace EShop.Web.Areas.Admin.Controllers
         {
             var model = await _repository.GetAllAsync(cancellationToken) ?? default;
 
-            return View(new ViewModelWithPageInfo<IEnumerable<Brand>>()
+            return View("Index" ,new ViewModelWithPageInfo<IEnumerable<Brand>>()
             {
                 PaginationInfo = new PaginationInfo()
                 {
@@ -63,7 +62,7 @@ namespace EShop.Web.Areas.Admin.Controllers
                 brand.Image = ImageNameGenerator.Generate();
                 await brandImage.SaveAsync(brand.Image, cancellationToken);
                 await _repository.AddAndSaveAsync(brand, cancellationToken);
-                return Redirect("/Admin/Brand");
+                return RedirectToAction(nameof(Index));
             }
 
             return View("Create", brand);
@@ -116,7 +115,7 @@ namespace EShop.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _repository.UpdateAsync(brand, cancellationToken);
-                return Redirect("/Admin/Brand");
+                return RedirectToAction(nameof(Index));
             }
             ModelState.AddModelError("All", "لطفا همه فیلد ها را پر کنید");
             return View("Edit", brand);
