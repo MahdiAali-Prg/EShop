@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using EShop.Common.Services;
+﻿using EShop.Common.Services.Url;
 using EShop.Test.Utilities.UrlHelper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Moq;
 using Xunit;
 

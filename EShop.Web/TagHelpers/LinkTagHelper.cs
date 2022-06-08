@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using EShop.Common.Services;
-using Microsoft.AspNetCore.Mvc;
+using EShop.Common.Services.Url;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;

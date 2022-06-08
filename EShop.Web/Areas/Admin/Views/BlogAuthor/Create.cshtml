@@ -1,0 +1,75 @@
+﻿@model BlogAuthor
+@{
+    ViewBag.Title = "افزودن نویسنده بلاگ";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title mb-0">افزودن نویسنده جدید</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <form class="form" asp-area="Admin" asp-action="Create" asp-controller="BlogAuthor" method="post" enctype="multipart/form-data">
+                    <div class="form-body">
+                        <div class="col-12 mb-1">
+                            <fieldset class="form-group">
+                                <label>نام کامل نویسنده</label>
+                                <input asp-for="Name" class="form-control round" placeholder="نام و نام خانوادگی نویسنده">
+                            </fieldset>
+                        </div>
+                        
+                        <div class="col-12 mb-1">
+                            <fieldset class="form-group">
+                                <label>توضیحات کوتاه در مورد نویسنده</label>
+                                <textarea asp-for="ShortDescription" placeholder="توضیحات کوتاه در مورد نویسنده" class="form-control round"></textarea>
+                            </fieldset>
+                        </div>
+                        
+                        <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
+                            <div class="card">
+                                <div class="card card-header">
+                                    تصویر بارگذاری شده
+                                </div>
+                                <div class="card card-body">
+                                    <img class="img-thumbnail col-6" height="200" src="/Images/AuthorImage/Author.jpg" id="perview_image" />
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">بازگذاری تصویر</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="imgInp" name="authorImage">
+                                    <label class="custom-file-label" for="inputGroupFile01">انتخاب فایل</label>
+                                </div>
+                            </div>
+                            @Html.AntiForgeryToken()
+                            <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <div class="text-danger" asp-validation-summary="All">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">ثبت نویسنده</button>
+                                    <a class="btn btn-link text-dark" asp-area="Admin" asp-action="Index" asp-controller="BlogAuthor">بازگشت</a>
+                                </fieldset>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script
+{
+    <script asp-src-include="/lib/**.js", asp-src-exclude="/lib/AdminSweetAlert.*"></script>
+    <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("ShortDescription");
+    </script>
+}

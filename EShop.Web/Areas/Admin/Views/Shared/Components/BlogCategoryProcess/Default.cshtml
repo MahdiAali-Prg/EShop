@@ -1,0 +1,25 @@
+﻿@model BlogCategoryProcessViewModel
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title-wrap bar-success">
+            <h4 class="card-title">دسته بندی بلاگ ها</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-block text-center">
+            <p>دسته بندی های اصلی (@(Model.ParentCategories) - @((Model.ParentCategories * 100) / Model.CategoriesCount) %)</p>
+            <div class="progress mb-2">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+                     aria-valuenow="@((Model.ParentCategories * 100) / Model.CategoriesCount)" aria-valuemin="0" aria-valuemax="100" style="width:@((Model.ParentCategories * 100) / Model.CategoriesCount)%"></div>
+            </div>
+            
+            <p>زیر دسته بندی های 1 (@(Model.ChildCategories) - @((Model.ChildCategories * 100) / Model.CategoriesCount) %)</p>
+            <div class="progress mb-2">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+                     aria-valuenow="@((Model.ChildCategories * 100) / Model.CategoriesCount)" aria-valuemin="0" aria-valuemax="100" style="width:@((Model.ChildCategories * 100) / Model.CategoriesCount)%"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

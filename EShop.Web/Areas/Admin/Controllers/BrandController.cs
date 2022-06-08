@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EShop.Common.DTOs;
-using EShop.Common.Services;
+using EShop.Common.Services.Image;
 using EShop.Data.Models;
 using EShop.Data.Repositories.GenericRepository;
+using EShop.Web.Filters;
 using EShop.Web.Tools;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,12 +24,12 @@ namespace EShop.Web.Areas.Admin.Controllers
             _repository = repository;
         }
 
-        [Route("/Admin/Brand/{pageId?}")]
-        public async Task<IActionResult> Index([FromRoute]int pageId = 1, CancellationToken cancellationToken = default)
+        [Route("/Admin/Brand/{pageId:positive?}")]
+        public async Task<IActionResult> Index([FromRoute] int pageId = 1, CancellationToken cancellationToken = default)
         {
-            var model = await _repository.GetAllAsync(cancellationToken) ?? default;
+            var model = await _repository.GetAllAsync(cancellationToken);
 
-            return View("Index" ,new ViewModelWithPageInfo<IEnumerable<Brand>>()
+            return View("Index", new ViewModelWithPageInfo<IEnumerable<Brand>>()
             {
                 PaginationInfo = new PaginationInfo()
                 {
@@ -60,7 +61,7 @@ namespace EShop.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 brand.Image = ImageNameGenerator.Generate();
-                await brandImage.SaveAsync(brand.Image, cancellationToken);
+                await brandImage.SaveAsync("BrandImage", brand, cancellationToken);
                 await _repository.AddAndSaveAsync(brand, cancellationToken);
                 return RedirectToAction(nameof(Index));
             }
@@ -73,34 +74,33 @@ namespace EShop.Web.Areas.Admin.Controllers
         #region Brand Detail
 
 
+        [HasIdParameter]
         public async Task<IActionResult> Detail([FromRoute] long id, CancellationToken cancellationToken = default)
         {
-            if (id > 0)
+            Brand brand = await _repository.FindAsync(id, cancellationToken);
+            if (brand != null)
             {
-                return View("Detail", await _repository.FindAsync(id, cancellationToken));
+                return View("Detail", brand);
             }
 
-            return BadRequest();
+            return NotFound();
         }
         #endregion
 
         #region Edit Brand
 
         [HttpGet]
+        [HasIdParameter]
         public async Task<IActionResult> Edit([FromRoute] long id, CancellationToken cancellationToken = default)
         {
-            if (id > 0)
+            Brand brand = await _repository.FindAsync(id, cancellationToken);
+            if (brand != null)
             {
-                Brand brand = await _repository.FindAsync(id, cancellationToken);
-                if (brand != null)
-                {
-                    return View("Edit", brand);
-                }
-
-                return NotFound();
+                return View("Edit", brand);
             }
 
-            return BadRequest();
+            return NotFound();
+
         }
 
         [HttpPost]
@@ -109,7 +109,7 @@ namespace EShop.Web.Areas.Admin.Controllers
         {
             if (brandImage != null && ImageCheck(brandImage))
             {
-                await brandImage.SaveAsync(brand.Image, cancellationToken);
+                await brandImage.SaveAsync("BrandImage", brand, cancellationToken);
             }
 
             if (ModelState.IsValid)

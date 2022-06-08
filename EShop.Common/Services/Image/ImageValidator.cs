@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 
-namespace EShop.Common.Services
+namespace EShop.Common.Services.Image
 {
     public class ImageValidator
     {

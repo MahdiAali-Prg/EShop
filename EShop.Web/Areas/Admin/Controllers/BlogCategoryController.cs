@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EShop.Data.Models;
 using EShop.Data.Repositories.GenericRepository;
+using EShop.Web.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 
@@ -25,6 +26,7 @@ namespace EShop.Web.Areas.Admin.Controllers
         #region Add New Blog Category
 
         [HttpGet]
+        [HasIdParameter]
         public IActionResult Create([FromRoute] long? id)
         {
             return View("Create", new BlogCategory()
@@ -55,6 +57,7 @@ namespace EShop.Web.Areas.Admin.Controllers
         #region Edit Blog Category
 
         [HttpGet]
+        [HasIdParameter]
         public async Task<IActionResult> Edit(long id)
         {
             if (id == default || id < 0)

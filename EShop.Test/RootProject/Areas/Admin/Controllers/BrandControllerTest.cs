@@ -88,20 +88,6 @@ namespace EShop.Test.RootProject.Areas.Admin.Controllers
             Assert.Equal("Index", (result as RedirectToActionResult)?.ActionName);
         }
 
-
-        [Fact]
-        public async Task DetailError()
-        {
-            // Arrange
-            BrandController brandController = new BrandController(BrandRepository.Repository());
-
-            // Act
-            var result = await brandController.Detail(default) as BadRequestResult;
-
-            // Assert
-            Assert.Equal(StatusCodes.Status400BadRequest, result?.StatusCode);
-        }
-
         [Fact]
         public async Task Detail()
         {
@@ -114,19 +100,6 @@ namespace EShop.Test.RootProject.Areas.Admin.Controllers
             // Assert
             Assert.Equal("Detail", result?.ViewName);
             Assert.True((result?.ViewData?.Model as Brand)?.Name != null);
-        }
-
-        [Fact]
-        public async Task GetEditBadRequestError()
-        {
-            // Arrange
-            BrandController brandController = new BrandController(BrandRepository.Repository());
-
-            // Act
-            var result = await brandController.Edit(default) as BadRequestResult;
-
-            // Assert
-            Assert.Equal(StatusCodes.Status400BadRequest, result?.StatusCode);
         }
 
         [Fact]

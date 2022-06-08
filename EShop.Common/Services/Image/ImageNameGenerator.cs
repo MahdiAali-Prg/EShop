@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EShop.Common.Services
+namespace EShop.Common.Services.Image
 {
     public static class ImageNameGenerator
     {
