@@ -1,4 +1,4 @@
-﻿using EShop.Common.Services;
+﻿using EShop.Common.Services.Image;
 using Xunit;
 
 namespace EShop.Test.CommonClassLib.Services

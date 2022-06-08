@@ -3,7 +3,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 
-namespace EShop.Common.Services
+namespace EShop.Common.Services.Url
 {
     public class UrlGenerator
     {

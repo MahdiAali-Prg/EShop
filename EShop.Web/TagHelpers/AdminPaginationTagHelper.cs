@@ -1,5 +1,5 @@
 ﻿using EShop.Common.DTOs;
-using EShop.Common.Services;
+using EShop.Common.Services.Url;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;

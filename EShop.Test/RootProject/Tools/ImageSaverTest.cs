@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using EShop.Common.Services;
+using EShop.Common.Services.Image;
+using EShop.Data.Models;
 using EShop.Test.Utilities.Images;
 using EShop.Web.Tools;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +25,7 @@ namespace EShop.Test.RootProject.Tools
 
                 // Act
 
-            await image.SaveAsync(ImageNameGenerator.Generate());
+            await image.SaveAsync("BrandImage", new Brand(){Image = ImageNameGenerator.Generate()}, default);
 
             // Assert
             Assert.Equal(1, Directory.GetFiles(fileDocument)?.Length);

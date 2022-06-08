@@ -1,8 +1,10 @@
 ﻿@{
-    ViewBag.Title = "لیست برند ها";
+    ViewBag.Title = "نویسندگان بلاگ";
 }
 
-@model ViewModelWithPageInfo<IEnumerable<Brand>>
+@model ViewModelWithPageInfo<IQueryable<BlogAuthor>>
+
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -10,7 +12,7 @@
 
                 <div class="card-title-wrap bar-primary">
                     <h4 class="card-title">
-                        لیست برند ها
+                        لیست نویسندگان ها
                     </h4>
                 </div>
 
@@ -18,7 +20,7 @@
                     <i class="la la-ellipsis-v font-medium-3"></i>
                 </a>
 
-                <a class="btn btn-success" asp-area="Admin" asp-action="Create" asp-controller="Brand">افزودن برند جدید</a>
+                <a class="btn btn-success" asp-area="Admin" asp-action="Create" asp-controller="BlogAuthor">افزودن نویسنده جدید</a>
 
             </div>
             <div class="card-content mt-1">
@@ -26,32 +28,36 @@
                     <table class="table table-hover table-xl mb-0" id="recent-orders">
                         <thead>
                             <tr>
-                                <th class="border-top-0">کد برند</th>
+                                <th class="border-top-0">کد نویسنده</th>
                                 <th class="border-top-0">نام</th>
                                 <th class="border-top-0">تصویر</th>
+                                <th class="border-top-0">تاریخ عضویت</th>
                                 <th class="border-top-0">دستورات</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (Model.ViewModel.Any())
                             {
-                                @foreach (Brand item in Model.ViewModel)
+                                @foreach (BlogAuthor item in Model.ViewModel)
                                 {
                                     <tr>
                                         <td class="text-truncate">
-                                            @item.BrandId
+                                            @item.BlogAuthorId
                                         </td>
                                         <td class="text-truncate">
-                                            <a class="text-uppercase text-dark" asp-action="Detail" asp-controller="Brand" asp-area="Admin" asp-route-id="@item.BrandId">@item.Name</a>
+                                            <a class="text-uppercase text-dark" asp-action="Detail" asp-controller="BlogAuthor" asp-area="Admin" asp-route-id="@item.BlogAuthorId">@item.Name</a>
                                         </td>
                                         <td class="text-truncate">
-                                            <img class="img-thumbnail" src="/Images/BrandImage/@item.Image" alt="@item.Name" width="100" />
+                                            <img class="img-thumbnail" src="/Images/AuthorImage/@item.Image" alt="@item.Name" width="100" />
                                         </td>
+                                        <th>
+                                            @item.RegisterDate.ToShortDateString()
+                                        </th>
                                         <td>
                                             <a class="btn btn-sm btn-outline-danger round mb-0" href="">حذف</a>
-                                            <a class="btn btn-sm btn-outline-info round mb-0" asp-action="Edit" asp-area="Admin" asp-controller="Brand" asp-route-id="@item.BrandId">ویرایش</a>
-                                            <a class="btn btn-sm btn-outline-primary round mb-0" asp-action="Detail" asp-area="Admin" asp-controller="Brand" asp-route-id="@item.BrandId">نمایش اطلاعات</a>
-                                            <a class="btn btn-sm btn-outline-warning round mb-0" asp-controller="Brand" asp-action="Detail" asp-route-id="@item.BrandId">ویو کاربران</a>
+                                            <a class="btn btn-sm btn-outline-info round mb-0" asp-action="Edit" asp-area="Admin" asp-controller="BlogAuthor" asp-route-id="@item.BlogAuthorId">ویرایش</a>
+                                            <a class="btn btn-sm btn-outline-primary round mb-0" asp-action="Detail" asp-area="Admin" asp-controller="BlogAuthor" asp-route-id="@item.BlogAuthorId">نمایش اطلاعات</a>
+                                            <a class="btn btn-sm btn-outline-warning round mb-0" asp-controller="BlogAuthor" asp-action="Detail" asp-route-id="@item.BlogAuthorId">ویو کاربران</a>
                                         </td>
                                     </tr>
                                 }
@@ -59,7 +65,7 @@
                             else
                             {
                                 <tr>
-                                    <th colspan="4" class="text-truncate text-danger">در حال حاضر برندی ثبت نشده است</th>
+                                    <th colspan="5" class="text-truncate text-danger">در حال حاضر نویسنده ای ثبت نشده است</th>
                                 </tr>
                             }
                         </tbody>
@@ -68,7 +74,7 @@
                     {
                         <div class="mt-1">
 
-                            <div class="dataTables_paginate paging_simple_numbers" page-info="@Model.PaginationInfo" action="Index" controller="Brand"></div>
+                            <div class="dataTables_paginate paging_simple_numbers" page-info="@Model.PaginationInfo" action="Index" controller="BlogAuthor"></div>
                         </div>
                     }
                 </div>

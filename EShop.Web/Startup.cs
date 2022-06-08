@@ -1,9 +1,11 @@
 using System.IO;
+using EShop.Common.Services.RouteConstraint;
 using EShop.Data.Context;
 using EShop.Data.Repositories.GenericRepository;
 using EShop.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,13 @@ namespace EShop.Web
                 options.UseSqlServer(_configuration["ConnectionStrings:MainConnection"],
                     o => o.MigrationsAssembly("EShop.Web"));
             });
+
+            #region Congiguration
+
+            services.Configure<RouteOptions>(r => r.ConstraintMap.Add("positive", typeof(PositivePageId)));
+
+            #endregion
+
 
             #region Dependency Life Time
 

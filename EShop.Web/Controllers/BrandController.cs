@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using EShop.Common.DTOs;
 using EShop.Data.Models;
 using EShop.Data.Repositories.GenericRepository;
-using EShop.Data.Repositories.GenericRepository.GenericExtensionMethods;
+using EShop.Web.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -21,7 +21,7 @@ namespace EShop.Web.Controllers
             _repository = repository;
         }
 
-        [Route("/Brand/{pageId?}")]
+        [Route("/Brand/{pageId:positive?}")]
         public async Task<IActionResult> Index([FromRoute]int pageId = 1)
         {
             var model = await _repository.GetAllAsync();
@@ -38,6 +38,7 @@ namespace EShop.Web.Controllers
         }
 
         [Route("/Brand/Detail/{id:long}")]
+        [HasIdParameter]
         public async Task<IActionResult> Detail([FromRoute] long id)
         {
             Brand brand = await _repository.FindAsync(id);

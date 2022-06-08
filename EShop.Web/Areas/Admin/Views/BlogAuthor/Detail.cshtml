@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = $"اطلاعات ویسنده {@Model.Name}";
+}
+
+@model BlogAuthor
+
+
+<section id="inverse-table">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-warning">
+                        <h4 class="card-title">اطلاعات نویسنده @Model.Name</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <p>@Model.Name {@Model.BlogAuthorId}</p>
+                        <p>تاریخ عضویت : @Model.RegisterDate</p>
+                        
+                        <div class="container-fluid">
+                            @Html.Raw(Model.ShortDescription)
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="h6 btn btn-link" asp-area="Admin" asp-controller="BlogAuthor" asp-action="Index">بازگشت</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

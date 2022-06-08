@@ -19,7 +19,7 @@ namespace EShop.Test.Utilities.Repository
                     new Brand() { BrandId = 2, Name = "Brand 2", Description = "Brand Description 2", Image = "image path"},
                     new Brand() { BrandId = 3, Name = "Brand 3", Description = "Brand Description 3", Image = "image path"}
                 }.AsQueryable());
-            repository.Setup(s => s.FindAsync(It.IsAny<object>(), cancellationToken))
+            repository.Setup(s => s.FindAsync(It.IsAny<long>(), cancellationToken))
                 .ReturnsAsync(new Brand()
                 {
                     BrandId = 1,
