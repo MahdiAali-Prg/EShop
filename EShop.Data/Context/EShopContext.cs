@@ -16,6 +16,7 @@ namespace EShop.Data.Context
         public DbSet<Brand> Brands { get; set; }
         public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<BlogAuthor> BlogAuthors { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

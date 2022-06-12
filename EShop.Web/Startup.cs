@@ -25,6 +25,7 @@ namespace EShop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddDbContext<EShopContext>(options =>
             {
                 options.UseSqlServer(_configuration["ConnectionStrings:MainConnection"],
@@ -69,6 +70,7 @@ namespace EShop.Web
             {
                 endpoints.MapControllerRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

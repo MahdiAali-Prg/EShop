@@ -1,0 +1,55 @@
+﻿@model ContactUsResponseViewModel
+@{
+    ViewBag.Title = "ارسال پاسخ";
+}
+@section css
+{
+    <link href="/Admin-Assets/vendors/css/sweetalert2.min.css" rel="stylesheet" />
+}
+<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title-wrap bar-success">
+						<h4 class="card-title mb-0">پاسخ به @Model.Email</h4>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="px-3">
+                        <form class="form" asp-area="Admin" asp-controller="ContactUs" asp-action="MessageResponse" method="post" id="form">
+                            <input type="hidden" asp-for="MessageId"/>
+                            <input type="hidden" asp-for="Email"/>
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <div class="m-1 p-2 border border-danger">
+                                                در حال پاسخ به : @ViewData["Message"]
+                                            </div>
+                                            <label>پاسخ</label>
+                                            <textarea asp-for="Response" class="form-control round" placeholder="پاسخ پیام را وارد کنید"></textarea>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                @Html.AntiForgeryToken()
+                            </div>
+                            <div class="text-danger" asp-validation-summary="All"></div>
+                        </form>
+                        <a class="btn btn-success" onclick="GenericFormSubmitWarning('form', 'آیا از یاسخ مطمعن هستید ؟')">
+                            <i class="icon-paper-plane"></i>
+                        </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+@section script
+{
+<script src="/Admin-Assets/vendors/js/sweetalert2.min.js"></script>
+<script asp-src-include="/lib/**.js"></script>
+<script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace("Response");
+</script>
+}

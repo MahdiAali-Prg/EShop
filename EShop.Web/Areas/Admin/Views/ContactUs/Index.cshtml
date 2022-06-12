@@ -1,0 +1,84 @@
+﻿@model ViewModelWithPageInfo<IEnumerable<ContactUs>>
+@{
+    ViewBag.Title = "لیست تماس با ما";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+
+                <div class="card-title-wrap bar-primary">
+                    <h4 class="card-title">
+                        لیست پیغام ها
+                    </h4>
+                </div>
+
+                <a class="heading-elements-toggle">
+                    <i class="la la-ellipsis-v font-medium-3"></i>
+                </a>
+
+            </div>
+            <div class="card-content mt-1">
+                <div class="table-responsive">
+                    <table class="table table-hover table-xl mb-0" id="recent-orders">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">کد پیام</th>
+                                <th class="border-top-0">ایمیل</th>
+                                <th class="border-top-0">متن</th>
+                                <th class="border-top-0">وضعیت</th>
+                                <th class="border-top-0">دستورات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ViewModel.Any())
+                            {
+                                @foreach (var item in Model.ViewModel)
+                                {
+                                    <tr>
+                                        <td class="text-truncate">
+                                          @item.ContactUsId
+                                        </td>
+                                        <td class="text-truncate">
+                                            <a class="btn btn-link" href="mailto:@item.Email">@item.Email</a>
+                                        </td>
+                                        <td class="text-truncate">
+                                            @item.Message.Substring(0, 50) ...
+                                        </td>
+                                        <td class="text-truncate">
+                                            @if (item.HasResponse)
+                                            {
+                                                <p class="text-success">پاسخ داده شده</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="text-danger">بدون پاسخ</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-outline-danger round mb-0" asp-area="Admin" asp-controller="ContactUs" asp-action="Detail" asp-route-id="@item.ContactUsId">مشاهده</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th colspan="4" class="text-truncate text-danger">در حال حاضر تماسی است</th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @if (Model.ViewModel.Any())
+                    {
+                        <div class="mt-1">
+
+                            <div class="dataTables_paginate paging_simple_numbers" page-info="@Model.PaginationInfo" action="Index" controller="ContactUs"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

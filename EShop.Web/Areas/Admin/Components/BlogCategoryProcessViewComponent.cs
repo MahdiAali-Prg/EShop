@@ -3,10 +3,8 @@ using System.Threading.Tasks;
 using EShop.Common.DTOs;
 using EShop.Data.Models;
 using EShop.Data.Repositories.GenericRepository;
-using EShop.Data.Repositories.GenericRepository.GenericExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.EntityFrameworkCore;
 
 namespace EShop.Web.Areas.Admin.Components
 {
