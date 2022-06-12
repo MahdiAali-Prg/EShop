@@ -106,19 +106,6 @@ namespace EShop.Test.RootProject.Areas.Admin.Controllers
         #region Edit
 
         [Fact]
-        public async Task GetEditBadRequestError()
-        {
-            // Arrange
-            BlogCategoryController blogCategoryController = new BlogCategoryController(BlogCategoryRepository.Repository());
-
-            // Act
-            var result = await blogCategoryController.Edit(-1) as BadRequestResult;
-
-            // Assert
-            Assert.Equal(StatusCodes.Status400BadRequest, result?.StatusCode);
-        }
-
-        [Fact]
         public async Task GetEditNotFondError()
         {
             // Arrange

@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@inject IConfiguration Configuration
+@{
+    ViewBag.Title = "تماس با ما";
+}
+
+@if (Request.Query.ContainsKey("success"))
+{
+    <div class="alert alert-success">
+        پیام شما با موفقیت ازسال شد
+    </div>
+}
+<h4>تماس با ما</h4>
+<form method="post" class="form-account text-right" asp-page="/ContactUs/Index">
+    <div class="form-account-title">
+        <label>ایمیل</label>
+        <input class="form-control round" asp-for="ContactUs.Email">
+    </div>
+    <div class="form-account-title">
+        <label>شماره تلفن (اختیاری)</label>
+        <input class="form-control round" asp-for="ContactUs.PhoneNumber"/>
+    </div>
+    <div class="form-account-title">
+        <label>متن پیام</label>
+        <textarea rows="6" asp-for="ContactUs.Message" class="form-control round"></textarea>
+    </div>
+    <div class="form-auth-row">
+        <div class="g-recaptcha" data-sitekey="@Configuration["SiteKey"]"></div>
+    </div>
+    
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-row-account">
+        <button class="btn btn-primary btn-login">ارسال پیام</button>
+    </div>
+</form>
+
+@section css
+{
+    <script src="https://www.google.com/recaptcha/api.js?hl=fa" async defer></script>
+}
+@section script
+{
+    <script src="/lib/jquery.validate.min.js"></script>
+    <script src="/lib/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,45 @@
+﻿@model ContactUs
+@{
+    ViewBag.Title = "اطلاعات تماس";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+
+                <div class="card-title-wrap bar-primary">
+                    <h4 class="card-title">
+                        اطلاعات پیام
+                    </h4>
+                </div>
+
+                <a class="heading-elements-toggle">
+                    <i class="la la-ellipsis-v font-medium-3"></i>
+                </a>
+
+            </div>
+            <div class="card-content mt-1 mr-2">
+                <p class="text-dark">ایمیل : @Model.Email</p>
+                <p class="text-dark">شماره تلفن : @Model.PhoneNumber</p>
+                <p class="text-dark">متن پیام :</p>
+                <div class="container-fluid">
+                    <div class="border border-blue p-2">
+                        @Model.Message
+                    </div>
+                </div>
+                <p class="">وضعیت : @(Model.HasResponse ? "پاسخ داده شده" : "بدون پاسخ" )</p>
+                @if (!Model.HasResponse)
+                {
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <a class="btn btn-block btn-success" asp-area="Admin" asp-controller="ContactUs" asp-action="MessageResponse" asp-route-id="@Model.ContactUsId">ارسال پاسخ</a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <a class="btn btn-block btn-link" asp-area="Admin" asp-controller="ContactUs" asp-action="Index">بازگشت</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

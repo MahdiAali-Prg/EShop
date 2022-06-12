@@ -3,7 +3,6 @@ using EShop.Data.Models;
 using EShop.Data.Repositories.GenericRepository;
 using EShop.Web.Filters;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace EShop.Web.Areas.Admin.Controllers
 {
@@ -26,7 +25,6 @@ namespace EShop.Web.Areas.Admin.Controllers
         #region Add New Blog Category
 
         [HttpGet]
-        [HasIdParameter]
         public IActionResult Create([FromRoute] long? id)
         {
             return View("Create", new BlogCategory()
@@ -60,11 +58,6 @@ namespace EShop.Web.Areas.Admin.Controllers
         [HasIdParameter]
         public async Task<IActionResult> Edit(long id)
         {
-            if (id == default || id < 0)
-            {
-                return BadRequest();
-            }
-
             BlogCategory blogCategory = await _repository.FindAsync(id);
             if (blogCategory != null)
             {
@@ -75,7 +68,7 @@ namespace EShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([FromForm][Bind("BlogCategoryId,Name,ParentId")]BlogCategory blogCategory)
+        public async Task<IActionResult> Edit([FromForm][Bind("BlogCategoryId,Name,ParentId")] BlogCategory blogCategory)
         {
             if (await _repository.FindAsync(blogCategory.BlogCategoryId) is null)
             {
@@ -98,7 +91,7 @@ namespace EShop.Web.Areas.Admin.Controllers
 
         public async Task<bool> NameValidation(string name)
         {
-            return !await _repository.ExistAsync(p => p.Name == name);
+            return !await _repository.ExistAsync(p => p.Name.Equals(name));
         }
 
         #endregion
